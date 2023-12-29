@@ -57,7 +57,7 @@ export default function Header() {
       <div className={headerClasses}>
         <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
           <div
-            className="font-bold text-2xl cursor-pointer flex items-center 
+            className="tracking-wide font-bold text-xl md:text-3xl cursor-pointer flex items-center 
       text-white font-title"
           >
             <span className="w-14 md:items-center mr-4">
@@ -67,19 +67,19 @@ export default function Header() {
                 // className="w-8 h-8 md:items-center mt-2 mr-4"
               />
             </span>
-            Elegant Shop
+            ELEGANT SHOP
           </div>
 
           <div
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+            className=" text-white text-3xl absolute right-8 top-7 cursor-pointer md:hidden"
           >
             <ion-icon name={isMobileMenuOpen ? "close" : "menu"}></ion-icon>
           </div>
 
           <ul
-            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-              isMobileMenuOpen ? "top-20 " : "top-[-490px]"
+            className={`bg-stone-800 md:bg-transparent md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:h-auto h-screen md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+              isMobileMenuOpen ? "top-20 " : "top-[-800px]"
             }`}
           >
             {Links.map((link) => (
