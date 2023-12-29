@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext, useState, useEffect } from "react";
 import CartModal from "./CartModal.jsx";
 import { CartContext } from "../store/shopping-cart-context.jsx";
 
@@ -31,18 +31,36 @@ export default function Header() {
     { name: "Contact", link: "/" },
   ];
 
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const headerClasses = `shadow-md w-full fixed top-0 left-0 z-50 bg-stone-800 ${
+    scrollY > 50 ? "bg-opacity-50" : "bg-opacity-100"
+  } transition-all duration-500 ease-in`;
+
   return (
     <>
       <CartModal ref={modal} title="Your Cart" actions={modalActions} />
 
       {/* className="fixed left-0 right-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 text-gray-100" */}
-      <div className="shadow-md w-full fixed top-0 left-0">
-        <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+      <div className={headerClasses}>
+        <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
           <div
-            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-gray-800"
+            className="font-bold text-2xl cursor-pointer flex items-center 
+      text-white font-title"
           >
-            <span className="w-8 h-8 md:items-center mt-2 mr-4">
+            <span className="w-14 md:items-center mr-4">
               <img
                 src="logo.png"
                 alt="Elegant model"
@@ -60,7 +78,7 @@ export default function Header() {
           </div>
 
           <ul
-            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
               isMobileMenuOpen ? "top-20 " : "top-[-490px]"
             }`}
           >
@@ -71,7 +89,7 @@ export default function Header() {
               >
                 <a
                   href={link.link}
-                  className=" font-bold text-stone-900 duration-500"
+                  className=" font-bold text-white duration-500"
                 >
                   {link.name}
                 </a>
@@ -80,9 +98,10 @@ export default function Header() {
 
             <button
               onClick={handleOpenCartClick}
-              className="flex md:justify-between bg-yellow-400 rounded px-4 py-2 text-gray-800 hover:bg-yellow-500"
+              className="flex md:items-center bg-orange-800 rounded px-4 py-2 text-white hover:bg-orange-900"
             >
-              Cart ({cartQuantity})
+              <ion-icon name="cart-outline" size="large"></ion-icon>
+              <span className="ml-2">({cartQuantity})</span>
             </button>
           </ul>
         </div>
