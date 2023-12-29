@@ -67,9 +67,12 @@ export default function Header() {
             {Links.map((link) => (
               <li
                 key={link.name}
-                className="md:mr-8 md:hover:border-b-2 text-xl md:my-0 my-7"
+                className="md:mr-8 md:hover:border-b-2 text-l md:my-0 my-7"
               >
-                <a href={link.link} className="text-gray-800 duration-500">
+                <a
+                  href={link.link}
+                  className=" font-bold text-stone-900 duration-500"
+                >
                   {link.name}
                 </a>
               </li>
